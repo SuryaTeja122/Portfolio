@@ -2,29 +2,11 @@ import { useEffect, useRef, useState, useMemo } from "react";
 import { gsap } from "gsap";
 import {
   FiFileText,
-  FiPlay,
-  FiPause,
-  FiSkipBack,
-  FiSkipForward,
 } from "react-icons/fi";
 
 export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
   const charRefs = useRef<HTMLSpanElement[]>([]);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const shouldPlayRef = useRef(false);
-
-  const playlist = useMemo(
-    () => [
-      { name: "Cosmic Dreams", file: "audiopapkin-ambient-soundscapes-001-space-atmosphere-303246.mp3" },
-      { name: "Stellar Voyage", file: "audiopapkin-ambient-soundscapes-003-space-atmosphere-303242.mp3" },
-      { name: "Nebula Whispers", file: "audiopapkin-ambient-soundscapes-007-space-atmosphere-304974.mp3" },
-      { name: "Infinite Horizons", file: "idoberg-space-chords-loop-310493.mp3" },
-    ],
-    [],
-  );
 
   const nameLine1 = "B Surya Teja".split("");
   const nameLine2 = "".split("");
@@ -41,37 +23,6 @@ export default function Hero() {
     });
     return () => ctx.revert();
   }, []);
-
-  useEffect(() => {
-    if (audioRef.current) {
-      const trackFile = playlist[currentTrackIndex]?.file;
-      if (trackFile) {
-        audioRef.current.src = `/${trackFile}`;
-        audioRef.current.load();
-        if (shouldPlayRef.current) {
-          const playPromise = audioRef.current.play();
-          if (playPromise !== undefined) {
-            playPromise.then(() => { setIsPlaying(true); shouldPlayRef.current = false; }).catch(() => { setIsPlaying(true); shouldPlayRef.current = false; });
-          }
-        }
-      }
-    }
-  }, [currentTrackIndex, playlist]);
-
-  const togglePlay = () => {
-    if (audioRef.current) {
-      if (isPlaying) { audioRef.current.pause(); setIsPlaying(false); }
-      else {
-        if (!audioRef.current.src) { audioRef.current.src = `/${playlist[currentTrackIndex].file}`; audioRef.current.load(); }
-        const playPromise = audioRef.current.play();
-        if (playPromise !== undefined) { playPromise.then(() => setIsPlaying(true)).catch(() => setIsPlaying(true)); }
-        else setIsPlaying(true);
-      }
-    }
-  };
-
-  const handlePrevTrack = () => { setCurrentTrackIndex((currentTrackIndex - 1 + playlist.length) % playlist.length); shouldPlayRef.current = true; };
-  const handleNextTrack = () => { setCurrentTrackIndex((currentTrackIndex + 1) % playlist.length); shouldPlayRef.current = true; };
 
   const renderChars = (chars: string[], colorClass: string) => (
     <div className="overflow-hidden flex flex-wrap">
@@ -104,26 +55,11 @@ export default function Hero() {
       </div>
 
       <div className="absolute bottom-2 sm:bottom-3 md:bottom-4 lg:bottom-6 xl:bottom-8 left-0 w-full flex flex-col items-center justify-center gap-2 sm:gap-3 md:gap-4 lg:gap-5 z-30 pointer-events-auto">
-        <audio ref={audioRef} onEnded={() => { const nextIndex = (currentTrackIndex + 1) % playlist.length; setCurrentTrackIndex(nextIndex); shouldPlayRef.current = true; }} />
         <div className="lg:hidden text-center w-full">
           <h1 className="text-base font-sans font-bold tracking-tight leading-tight flex flex-col items-center gap-0.5">
             <div className="flex">{renderChars(roleLine1, "bg-gradient-to-r from-[#B200FF] to-[#00F0FF] text-base")}</div>
             <div className="flex">{renderChars(roleLine2, "bg-gradient-to-r from-gray-300 to-gray-600 text-xs tracking-normal")}</div>
           </h1>
-        </div>
-        <div className="flex flex-col gap-2.5 text-gray-400 font-sans text-xs tracking-widest bg-black/20 backdrop-blur-md px-5 md:px-6 py-2 rounded-full border border-white/10 shadow-[0_0_15px_rgba(0,240,255,0.1)] max-w-[95vw]">
-          <div className="flex items-center gap-2.5 justify-center">
-            <button onClick={handlePrevTrack} title="Previous Track" className="hover:text-[#00F0FF] transition-colors shrink-0"><FiSkipBack size={12} className="w-4 h-4" /></button>
-            <button onClick={togglePlay} title={isPlaying ? "Pause" : "Play"} className="hover:text-white transition-colors shrink-0">
-              {isPlaying ? <FiPause size={14} className="text-[#00F0FF] w-4.5 h-4.5" /> : <FiPlay size={14} className="text-[#a580ff] w-4.5 h-4.5" />}
-            </button>
-            <button onClick={handleNextTrack} title="Next Track" className="hover:text-[#00F0FF] transition-colors shrink-0"><FiSkipForward size={12} className="w-4 h-4" /></button>
-          </div>
-          <div className="flex items-center gap-2.5 shrink-0">
-            <div className="w-px h-3 bg-white/20"></div>
-            <span className="inline-block w-1 h-1 rounded-full bg-[#00F0FF] animate-pulse shrink-0"></span>
-            <span className="truncate text-xs">{playlist[currentTrackIndex].name}</span>
-          </div>
         </div>
         <a href="/resume.pdf" className="resume-btn flex items-center gap-2.5 text-gray-400 hover:text-white font-sans font-semibold text-xs sm:text-sm lg:text-base tracking-[0.15em] md:tracking-[0.2em] group transition-colors whitespace-nowrap">
           <span>RESUME</span>

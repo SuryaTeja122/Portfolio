@@ -35,7 +35,6 @@ Perfect for developers, designers, and creative professionals who want to make a
 - ✅ **No Overlapping Content** — Carefully crafted breakpoints ensure clean layouts everywhere
 - ✅ **3D Animations** — Interactive Earth in hero section with Three.js
 - ✅ **Smooth Interactions** — Framer Motion animations and GSAP sequences
-- ✅ **Music Player** — Embedded ambient soundscape with track selection
 - ✅ **Project Showcase** — 3D carousel with Mars visualization
 - ✅ **Mobile Hamburger Menu** — Full navigation below 1024px
 - ✅ **Experience Grid** — Dynamic layout (1 → 2 → 3 columns)
@@ -82,7 +81,7 @@ Perfect for developers, designers, and creative professionals who want to make a
 masterpiece-portfolio/
 ├── src/
 │   ├── components/
-│   │   ├── Hero.tsx              # Landing hero with Earth & music player
+│   │   ├── Hero.tsx              # Landing hero with Earth visualization
 │   │   ├── Navbar.tsx            # Navigation with hamburger menu
 │   │   ├── About.tsx             # About section with journey timeline
 │   │   ├── Projects.tsx          # 3D project carousel & Mars planet
@@ -223,7 +222,6 @@ Modify project data in `/src/components/Projects.tsx` with your own portfolio it
 ### Custom Breakpoints
 
 ```css
-min-[615px]:   /* Music player track info */
 min-[770px]:   /* Navbar hamburger toggle */
 min-[1000px]:  /* Experience grid 2-columns */
 min-[1020px]:  /* Hero Earth centering */
