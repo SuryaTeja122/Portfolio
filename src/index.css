@@ -1,0 +1,86 @@
+﻿@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", "Inter", "sans-serif";
+  --font-mono: "JetBrains Mono", "monospace";
+}
+
+@layer base {
+  html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100%;
+    background-color: #020202;
+    color: white;
+    font-family: "Poppins", "Inter", sans-serif;
+  }
+}
+
+/* Lenis Recommended CSS */
+html.lenis {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.glass-panel {
+  background: rgba(10, 10, 10, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* WebKit Typography Magic (for hover states) */
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+[data-theme="light"] {
+  --tw-bg-opacity: 1;
+}
+
+[data-theme="light"] .bg-black\/40 {
+  background-color: rgba(255,255,255,0.7) !important;
+}
+
+[data-theme="light"] .bg-black\/60 {
+  background-color: rgba(220,225,240,0.8) !important;
+}
+
+[data-theme="light"] .border-white\/20 {
+  border-color: rgba(100,120,180,0.3) !important;
+}
+
+[data-theme="light"] .text-white\/60,
+[data-theme="light"] .text-white\/70,
+[data-theme="light"] .text-white\/80 {
+  color: rgba(30,40,80,0.8) !important;
+}
+
+[data-theme="light"] .text-white\/50,
+[data-theme="light"] .text-white\/40 {
+  color: rgba(30,40,80,0.55) !important;
+}
+
+[data-theme="light"] .text-gray-400,
+[data-theme="light"] .text-gray-500 {
+  color: rgba(60,70,120,0.7) !important;
+}
