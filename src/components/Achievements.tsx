@@ -86,6 +86,16 @@ const achievements = [
     credentialId: "",
     color: "#B200FF",
   },
+  {
+  id: 9,
+  title: "TCS iON Career Edge – Generative AI Essentials",
+  issuer: "Tata Consultancy Services (TCS iON)",
+  date: "Jun 2026",
+  description: "Completed TCS iON Career Edge course covering Foundations of AI & ML, Fundamentals of Generative AI, Prompt Engineering, Responsible AI, and Real-world Implementation.",
+  pdf: "TCS_ION_Course.pdf",
+  credentialId: "8773-27647617-1016",
+  color: "#00F0FF",
+},
 ];
 
 type Achievement = typeof achievements[0];
